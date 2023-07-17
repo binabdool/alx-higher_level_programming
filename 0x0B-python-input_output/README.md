@@ -1,6 +1,7 @@
-Resources
-Read or watch:
 
+Read or watch:![68747470733a2f2f656e637279707465642d74626e302e677374617469632e636f6d2f696d616765733f713d74626e3a414e6439476351625645484a684b4d62704d734a786e6c6330732d5972317153577863637567726a595126757371703d434155](https://github.com/binabdool/alx-higher_level_programming/assets/121132708/ecbdf74e-b148-422f-9c66-494c8f2e4be3)
+
+Resources
 7.2. Reading and Writing Files
 8.7. Predefined Clean-up Actions
 Dive Into Python 3: Chapter 11. Files (until “11.4 Binary Files” (included))
