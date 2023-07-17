@@ -1,74 +1,74 @@
-
-dule that defines a square object"""
+#!/usr/bin/python3
+"""
+    contains class Square implements class Rectangle
+"""
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """Defines a square class"""
-
+    """
+        Square implements rectangle
+    """
     def __init__(self, size, x=0, y=0, id=None):
-        """Method that initialized the square
-        Args:
-           size: side's size of the square
-           x: Position on x axis.
-           y: Position on y axis.
-        Return:
-           Always nothing.
+        """
+            initialises Square (overrides Rectangle init)
         """
         super().__init__(size, size, x, y, id)
 
-    def __str__(self):
-        """Method that returns a string"""
-        return ("[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y,
-                                                  self.width))
-
     @property
     def size(self):
-        """Getter the size of the square
+        """
+            returns the size of the square
         """
         return self.width
 
     @size.setter
     def size(self, value):
-        """Setter the size of the square
-        Args:
-           value: Size to assign
-        Return:
-           Always Nothing
         """
+            sets the value of size
+        """
+        if type(value) != int:
+            raise TypeError("width must be an integer")
+        if value <= 0:
+            raise ValueError("width must be > 0")
+
         self.width = value
-        self.heigth = value
+        self.height = value
 
     def update(self, *args, **kwargs):
-        """Method that update arguments for square object
-        Args:
-           *args: list of arguments.
-           **kwargs: Dictionary of the arguments.
-        Return:
-           Always nothing
         """
-        dict_order = ['id', 'size', 'x', 'y']
-        if args is not None and bool(args) is True:
-            i = 0
-            for key in dict_order:
-                try:
-                    setattr(self, key, args[i])
-                except IndexError:
-                    pass
-                i += 1
-        else:
-            for key in dict_order:
-                try:
-                    setattr(self, key, kwargs[key])
-                except KeyError:
-                    pass
+            assigns key/value argument to attributes
+            kwargs is skipped if args is not empty
+            Args:
+                *args -  variable number of no-keyword args
+                **kwargs - variable number of keyworded args
+        """
+        if len(args) == 0:
+            for key, val in kwargs.items():
+                self.__setattr__(key, val)
+            return
+
+        try:
+            self.id = args[0]
+            self.size = args[1]
+            self.x = args[2]
+            self.y = args[3]
+        except IndexError:
+            pass
+
+    def __str__(self):
+        """
+            Overloading str function
+        """
+        return "[{}] ({}) {}/{} - {}".format(type(self).__name__,
+                                             self.id, self.x, self.y,
+                                             self.width)
 
     def to_dictionary(self):
-        """Method that returns the dictionary
-           representation of a Square.
         """
-        dict_order = ['id', 'x', 'size', 'y']
-        dict_attrs = {}
-        for key in dict_order:
-            dict_attrs[key] = getattr(self, key)
-        return dict_attrs
+            Returns the dictionary representation of a Square
+        """
+        return {'id': getattr(self, "id"),
+                'size': getattr(self, "width"),
+                'x': getattr(self, "x"),
+                'y': getattr(self, "y")}
